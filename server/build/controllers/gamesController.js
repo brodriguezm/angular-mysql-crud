@@ -40,13 +40,21 @@ class GamesController {
         });
     }
     update(req, res) {
-        res.json({
-            'text': 'Actualizando un juego'
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE games SET ? WHERE id = ?', [req.body, id]);
+            res.json({
+                'message': 'El juego ha sido actualizado correctamente'
+            });
         });
     }
     delete(req, res) {
-        res.json({
-            'text': 'eliminando un juego'
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM games WHERE id = ?', [id]);
+            res.json({
+                'message': 'El juego fue elminado correctamente'
+            });
         });
     }
 }

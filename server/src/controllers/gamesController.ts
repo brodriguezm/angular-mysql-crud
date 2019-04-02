@@ -27,15 +27,19 @@ class GamesController {
         });
     }
 
-    public update(req:Request, res:Response){
+    public async update(req:Request, res:Response): Promise<void> {
+        const {id} = req.params;
+        await db.query('UPDATE games SET ? WHERE id = ?', [req.body, id]);
         res.json({
-            'text' : 'Actualizando un juego'
+            'message' : 'El juego ha sido actualizado correctamente'
         })
     }
 
-    public delete(req: Request, res:Response){
+    public async delete(req: Request, res:Response): Promise<void>{
+        const {id} = req.params;
+        await db.query('DELETE FROM games WHERE id = ?', [id]);
         res.json({
-            'text' : 'eliminando un juego'
+            'message' : 'El juego fue elminado correctamente'
         });
     }
 
