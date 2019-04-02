@@ -4,22 +4,26 @@ import { json } from 'body-parser';
 
 class GamesController {
 
-    public list (req: Request, res: Response){
-        //db.query('DESCRIBE games;');
-        res.send({
-            'text': 'Listando juegos'
-        });
+    public async list (req: Request, res: Response){
+        const games = await db.query('SELECT * FROM games;');
+        res.json(games);
     }
 
-    public getOne(req: Request, res:Response){
-        res.json({
-            'text': 'Este es el juego ' + req.params.id
-        });
+    public async getOne(req: Request, res:Response){
+        const {id} = req.params;
+        const game = await db.query('SELECT * FROM games WHERE id = ?', [id]);
+        if(game.length > 0)
+            res.json(game[0]);
+        else{
+            res.status(404)
+                .json({'message':'No se encontró ningún juego con el id '+ id});
+        }
     }
 
-    public create(req: Request, res:Response){
+    public async create(req: Request, res:Response): Promise<void>{
+        await db.query('INSERT INTO games set ?', [req.body]);
         res.json({
-            'text' : 'creando un juego'
+            'message' : 'Juego guardado con éxito'
         });
     }
 
