@@ -24,7 +24,7 @@
             class="form-control"
             [(ngModel)]="game.image">
         </div>  
-        <button class="btn btn-success btn-block" (click)="saveNewGame()">
+        <button class="btn btn-success btn-block" (click)="actionEdit ? updateGame() : saveNewGame()">
           GUARDAR
         </button>
       </form>

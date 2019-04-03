@@ -9,7 +9,7 @@ class GamesController {
         res.json(games);
     }
 
-    public async getOne(req: Request, res:Response){
+    public async getOne(req: Request, res:Response): Promise<void>{
         const {id} = req.params;
         const game = await db.query('SELECT * FROM games WHERE id = ?', [id]);
         if(game.length > 0)
