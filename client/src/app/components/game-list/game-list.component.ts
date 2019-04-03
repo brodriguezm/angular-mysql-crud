@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { GamesService } from '../../services/games.service';
 import { Game } from '../../models/Game';
@@ -9,7 +9,7 @@ import { Game } from '../../models/Game';
   styleUrls: ['./game-list.component.css']
 })
 export class GameListComponent implements OnInit {
-
+  @HostBinding('class') classes = 'row'; 
   games: any = [];
 
   constructor(private gamesService: GamesService) { }

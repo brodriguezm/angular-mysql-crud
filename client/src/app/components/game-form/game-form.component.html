@@ -7,22 +7,24 @@
             name="title" 
             placeholder="Title"
             class="form-control"
+            [(ngModel)] = "game.title"
             autofocus>
         </div>
         <div class="form-group">
           <textarea name="description" 
             placeholder="Descripción"
             rows="2"
-            class="form-control"></textarea>
+            class="form-control"
+            [(ngModel)]="game.description"></textarea>
         </div>
         <div class="form-group">
           <input type="text" 
             name="image" 
             placeholder="Image"
             class="form-control"
-            autofocus>
+            [(ngModel)]="game.image">
         </div>  
-        <button class="btn btn-success btn-block">
+        <button class="btn btn-success btn-block" (click)="saveNewGame()">
           GUARDAR
         </button>
       </form>
