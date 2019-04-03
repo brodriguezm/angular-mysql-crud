@@ -11,13 +11,28 @@ import { Game } from '../../models/Game';
 export class GameListComponent implements OnInit {
   @HostBinding('class') classes = 'row'; 
   games: any = [];
-
+ 
   constructor(private gamesService: GamesService) { }
 
   ngOnInit() {
+    this.listGame();
+  }
+
+  listGame(){
     this.gamesService.getGames().subscribe(
       res => {
         this.games = res;
+      },
+      err => console.error(err)
+    )
+  }
+
+  deleteGame(id: string){
+    let me = this;
+    this.gamesService.deleteGame(id).subscribe(
+      res => {
+        console.info(res);
+        me.listGame();
       },
       err => console.error(err)
     )
